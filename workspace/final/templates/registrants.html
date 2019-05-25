@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Words</title>
+    </head>
+    <body>
+        <input autocomplete="off" autofocus name="q" placeholder="Query" type="text">
+
+        <ol></ol>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script>
+
+            let input = document.querySelector('input');
+            input.onkeyup = function() {
+                $.get('/registrants/search?q=' + input.value, function(data) {
+                    let html = '';
+                    for (person of data) {
+                        html += '<li>' + person + '</li>';
+                    }
+                    document.querySelector('ol').innerHTML = html;
+                });
+            };
+
+        </script>
+    </body>
+</html>
